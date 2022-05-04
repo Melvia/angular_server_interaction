@@ -9,12 +9,14 @@ import {User} from './user';
   styleUrls: ['./app.component.scss'],
   providers: [HttpService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit { 
+   
   users: User[]=[];
-
+   
   constructor(private httpService: HttpService){}
-
-  ngOnInit(){          
-    this.httpService.getData().subscribe((data: any) => this.users=data["userList"]);
-}
+    
+  ngOnInit(){
+        
+      this.httpService.getUsers().subscribe((data: User[]) => this.users=data);
+  }
 }
