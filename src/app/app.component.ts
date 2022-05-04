@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { HttpService } from './http.service';
+import {User} from './user';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [HttpService]
 })
 export class AppComponent {
-  title = 'my-ng7-app';
+  users: User[]=[];
+
+  constructor(private httpService: HttpService){}
+
+  ngOnInit(){          
+    this.httpService.getData().subscribe((data: any) => this.users=data["userList"]);
+}
 }
